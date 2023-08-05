@@ -1,0 +1,50 @@
+class AlarmCloc {
+    constructor() {
+        this.alarmCollection = [];
+        this.intervalId - null;
+    }
+    addClok(time, callback) {
+        if (!time) {
+            throw new Error('Отсутствуют обязательные аргументы');
+        }
+        if (!callback) {
+            throw new Error('Отсутствуют обязательные аргументы');
+        }
+        else if (this.alarmCollection.find(clok => clok.time === time)) {
+            console.warn('Уже присутствует звонок на это же время');
+        }
+        this.alarmCollection({time, callback, canCall});
+    }
+    removeClock (time) {
+        this.alarmCollection = this.alarmCollection.filter(clock => clock.time !==time);
+    }
+    getCurrentFormattedTime() {
+        return new Date().toTimeString().slice(0,5);
+    }
+    start() {
+        if(this.intervalId) {
+            return;
+        }
+        this.intervalId = setInterval(() => {
+            this.alarmCollection.forEach(clock => {
+                if(clock.time === this.getCurrentFormattedTime() && clock.canCall) {
+                    clock.canCall = false;
+                    clock.callback();
+                }
+            })
+        }, 1000);
+    }
+    stop() {
+        clearInterval(this.intervalId);
+        this.intervalId - null;
+    }
+    resetAllCalls() {
+        this.alarmCollection.forEach(clock => {
+            clock.canCall = true;
+        });
+    }
+    clearAlarms() {
+        this.stop();
+        this.alarmCollection = [];
+    }
+}
