@@ -13,7 +13,7 @@ function validateCount(products) {
     }
 }
 class Triangle {
-    consructor(sideOne, sideTwo, sideThree) {
+    constructor(sideOne, sideTwo, sideThree) {
         if ((sideOne + sideTwo) < sideThree || (sideTwo + sideThree) <sideOne || (sideOne + sideThree) < sideTwo) {
             throw new Error('Треугольник с такими сторонами не существует');
         }
@@ -35,10 +35,10 @@ function getTriangle(sideOne, sideTwo, sideThree) {
     }
     catch(error) {
         return {
-            get Perimeter() {
+            get perimeter() {
                 return 'Ошибка! Треугольник не существует';
             },
-            get Area() {
+            get area() {
                 return 'Ошибка! Треугольник не существует';
             }
         }
