@@ -3,10 +3,10 @@ function cachingDecoratorNew(func) {
   let cache = [];
   function wrapper(...args) {
     const hash = md5(args);
-    let objectInCache = cache.fing((item) => item.hash === hash);
+    let objectInCache = cache.find(item => item.hash === hash);
     if (objectInCache) {
-        console.log('Из кеша: ' + objectInCache.value);
-        return 'Из кэша ' + objectInCache.value;
+      console.log('Из кeша: ' + objectInCache.value);
+      return 'Из кeша: ' + objectInCache.value;
     }
     let result = func(...args);
     cache.push({'hash': hash, 'value': result});
@@ -37,6 +37,6 @@ function debounceDecoratorNew(func, delay) {
     wrapper.allCount++;
   }
   wrapper.count = 0;
-  wrapper.allCont = 0;
+  wrapper.allCount = 0;
   return wrapper;
 }
